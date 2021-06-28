@@ -1,0 +1,13 @@
+- fonction CE max à utiliser par tour (50 max, sinon ce du joueur).
+- gérer le manque de CE.
+
+- afficher les variables des joueurs
+    → vie
+    → ce used
+    → position
+    →
+
+- utiliser partout la fonction 'is_number'
+
+- mettre 'mes_strats' dans 'Jeu'
+- equip protec et soin pas obligé

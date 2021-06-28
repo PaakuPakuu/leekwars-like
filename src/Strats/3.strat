@@ -1,0 +1,20 @@
+strategy Exemple
+choose weapon EPLUCHEUR_LASER
+choose protection WOKLIER
+choose care ENGRAIS_IONIQUE
+add action 10
+if life < 30%
+use protection
+endif
+if life < 10
+use care
+if enemyLife > 5
+end
+endif
+endif
+if enemyInScope
+use weapon 4
+move backward 2
+else
+move forward 5
+endif

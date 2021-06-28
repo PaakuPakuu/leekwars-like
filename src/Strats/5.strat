@@ -1,0 +1,19 @@
+strategy Aled
+choose weapon EPLUCHEUR_LASER
+choose protection WOKLIER
+choose care ENGRAIS_IONIQUE
+add action 2
+if life < 10
+move backward 2
+use protection
+endif
+if life > 10%
+move forward 3
+endif
+if enemyInScope
+use weapon 1
+use protection
+else
+move forward 5
+use protection
+endif

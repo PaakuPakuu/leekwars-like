@@ -1,0 +1,20 @@
+strategy Pouet
+choose weapon COUPERET_LASER
+choose protection CASQUE_EGOUTTOIR
+choose care COMPOSTE_PROTONIQUE
+add action 10
+if life < 30%
+use protection
+endif
+if life < 10
+use care
+if enemyLife > 5
+end
+endif
+endif
+if enemyInScope
+use weapon 4
+move backward 2
+else
+move forward 5
+endif
