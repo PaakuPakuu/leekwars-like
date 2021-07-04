@@ -91,7 +91,7 @@ void show_vars(Jeu *jeu, Tableaux* tableaux, char *arg)
         strcat(jeu->texte, "\t-------------\n");
     } else if (strcmp(arg, "strategies") == 0) {
         strcat(jeu->texte, "\t--- Stratégies ---\n");
-        for(i = 0; i < NB_STRATS; i++) {
+        for(i = 0; i < tableaux->nb_strats; i++) {
             sprintf(temp, "/ %d / %s\n", i, tableaux->mes_strats[i]->nom);
             strcat(jeu->texte, temp);
         }
@@ -178,7 +178,7 @@ void show_var_i(Jeu *jeu, Tableaux* tableaux, char *arg, int i)
         if (BETA_TESTING) printf(BOLD "\nOUT :" NORMAL " \n%s\n", jeu->texte);
         sprintf(jeu->message, "Voici en haut les caractéristique du Soin n°%d.", i);
     }
-    else if (strcmp(arg, "strategy") == 0 && i >= 0 && i < NB_STRATS) {
+    else if (strcmp(arg, "strategy") == 0 && i >= 0 && i < tableaux->nb_strats) {
         Strat* s = tableaux->mes_strats[i];
         sprintf(jeu->texte,
                         "\t--- %s ---\n"
@@ -205,13 +205,13 @@ void show_var_i(Jeu *jeu, Tableaux* tableaux, char *arg, int i)
   * Return:
   *   NONE
   */
-void fight(Jeu *jeu, int v, int s1, int f, int s2)
+void fight(Jeu *jeu, int v, int s1, int f, int s2, int nb_strats)
 {
     if (!jeu->combat) {
         if (v >= 0 && v < NB_CHAMPS / 2) {
             if (f >= NB_CHAMPS / 2 && f < NB_CHAMPS) {
-                if (s1 >= -1 && s1 < NB_STRATS) {
-                    if (s2 >= -1 && s2 < NB_STRATS) {
+                if (s1 >= -1 && s1 < nb_strats) {
+                    if (s2 >= -1 && s2 < nb_strats) {
                         jeu->legume->champ = jeu->champs[v];
                         jeu->fruit->champ = jeu->champs[f];
                         jeu->equiping = 1;

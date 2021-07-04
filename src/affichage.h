@@ -7,7 +7,7 @@
 #define clear() printf("\033[H\033[J")
 #define gotoxy(x,y) printf("\033[%d;%dH", (y), (x))
 
-#define BETA_TESTING 0
+#define BETA_TESTING 1
 
 /*
  *  Caractères d'échappement.

@@ -93,7 +93,7 @@ void prompt_equip(Jeu* jeu, char** ma_commande)
   * Return:
   *   NONE
   */
-void prompt_fight(Jeu* jeu, char** ma_commande)
+void prompt_fight(Jeu* jeu, char** ma_commande, int nb_strats)
 {
     int v, f, s1, s2;
 
@@ -114,13 +114,13 @@ void prompt_fight(Jeu* jeu, char** ma_commande)
                     sprintf(jeu->message, POS_NUMBER_NEEDED " [f]");
                 else if (ma_commande[4] == NULL) {
                     f = atoi(ma_commande[3]);
-                    fight(jeu, v, -1, f, -1);
+                    fight(jeu, v, -1, f, -1, nb_strats);
                 } else if (!is_number(ma_commande[4]))
                     sprintf(jeu->message, POS_NUMBER_NEEDED " [s2]");
                 else {
                     f = atoi(ma_commande[3]);
                     s2 = atoi(ma_commande[4]);
-                    fight(jeu, v, -1, f, s2);
+                    fight(jeu, v, -1, f, s2, nb_strats);
                 }
             }
         } else {
@@ -137,13 +137,13 @@ void prompt_fight(Jeu* jeu, char** ma_commande)
                 sprintf(jeu->message, POS_NUMBER_NEEDED " [v]");
             else if (ma_commande[5] == NULL) {
                 f = atoi(ma_commande[4]);
-                fight(jeu, v, s1, f, -1);
+                fight(jeu, v, s1, f, -1, nb_strats);
             } else if (!is_number(ma_commande[5]))
                 sprintf(jeu->message, POS_NUMBER_NEEDED " [s2]");
             else {
                 f = atoi(ma_commande[4]);
                 s2 = atoi(ma_commande[5]);
-                fight(jeu, v, s1, f, s2);
+                fight(jeu, v, s1, f, s2, nb_strats);
             }
         }
     }
@@ -288,7 +288,7 @@ void prompt(Commande cmd, Jeu* jeu, Tableaux* tableaux, char** ma_commande) {
             prompt_show(jeu, tableaux, ma_commande);
             break;
         case FIGHT:
-            if(!jeu->combat && !jeu->equiping) prompt_fight(jeu, ma_commande);
+            if(!jeu->combat && !jeu->equiping) prompt_fight(jeu, ma_commande, tableaux->nb_strats);
             else sprintf(jeu->message, NOT_FIGHTING);
             break;
         case EQUIP:

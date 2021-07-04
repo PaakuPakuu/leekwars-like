@@ -478,12 +478,11 @@ Strat *creerStrat(char *nom, char *filename, char **tab){
   *   None
   */
 void creerListeStrats(Tableaux* tableaux, char **listenoms){
-    int n = NB_STRATS;
     char **tab, **tmp;
     int i, j = 0;
 
-    tableaux->mes_strats = (Strat**)calloc(sizeof(Strat*), n);
-    tableaux->listesNomsStrats = (char**)calloc(sizeof(char *), n);
+    tableaux->mes_strats = (Strat**)calloc(sizeof(Strat*), NB_STRATS);
+    tableaux->listesNomsStrats = (char**)calloc(sizeof(char *), NB_STRATS);
 
     for (i = 0; i < NB_STRATS; i++) {
         tmp = lireFile(listenoms[i]);
@@ -493,7 +492,6 @@ void creerListeStrats(Tableaux* tableaux, char **listenoms){
                 tableaux->mes_strats[j] = creerStrat(tableaux->listesNomsStrats[j], listenoms[i], tmp);
                 j++;
             } else {
-              n--;
               tab = tmp;
               while (*tab != NULL)
                   free(*tab++);
@@ -504,7 +502,7 @@ void creerListeStrats(Tableaux* tableaux, char **listenoms){
         else printf("ERROR\n");
     }
 
-    tableaux->nb_strats = n;
+    tableaux->nb_strats = j;
 }
 
 /** trouve l arme associé au nom
@@ -644,7 +642,7 @@ void equipementStrats(Jeu *jeu, Tableaux* tableaux){
 void printAllStrats(Tableaux* tableaux){
     int i = 0;
     printf("\t--- Strats ---\n");
-    for(i = 0; i < NB_STRATS; i++)
+    for(i = 0; i < tableaux->nb_strats; i++)
         printf("\t/ %d / %s\n", i, tableaux->mes_strats[i]->nom);
     printf("\t-------------\n\n");
 }
